@@ -65,6 +65,9 @@ export function CapsuleOpening({
               你们曾经把一段普通但舍不得丢掉的时刻放在这里。现在它醒了，按上传者整理好，
               一点点重新回到面前。
             </p>
+            <p className="fine-copy mt-3 text-xs tracking-[0.08em] uppercase">
+              From sealed memory to shared moment
+            </p>
           </motion.section>
 
           {groups.length ? (
@@ -105,7 +108,7 @@ export function CapsuleOpening({
                           “{contribution.message}”
                         </blockquote>
                       ) : (
-                        <p className="fine-copy text-sm">这次没留文字，只留下了画面。</p>
+                        <p className="fine-copy text-sm">这次没有留文字，只把那一刻留了下来。</p>
                       )}
 
                       <div className="photo-columns mt-5">

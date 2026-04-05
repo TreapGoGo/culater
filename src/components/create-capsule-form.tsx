@@ -102,7 +102,10 @@ export function CreateCapsuleForm() {
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           <label className="sm:col-span-2">
-            <span className="mb-2 block text-sm font-medium">胶囊标题</span>
+            <div className="mb-2 flex items-center justify-between gap-3">
+              <span className="block text-sm font-medium">胶囊标题</span>
+              <span className="fine-copy text-xs">最多 30 个字</span>
+            </div>
             <input
               name="title"
               maxLength={30}
@@ -113,7 +116,10 @@ export function CreateCapsuleForm() {
           </label>
 
           <label>
-            <span className="mb-2 block text-sm font-medium">创建者昵称</span>
+            <div className="mb-2 flex items-center justify-between gap-3">
+              <span className="block text-sm font-medium">创建者昵称</span>
+              <span className="fine-copy text-xs">最多 10 个字</span>
+            </div>
             <input
               name="creatorName"
               maxLength={10}
@@ -145,6 +151,9 @@ export function CreateCapsuleForm() {
               className="input-base"
               required
             />
+            <p className="fine-copy mt-2 text-xs leading-6">
+              现在支持精确到分钟，最短 1 分钟后开启，适合现场测试揭晓流程。
+            </p>
           </label>
         </div>
 
@@ -157,7 +166,7 @@ export function CreateCapsuleForm() {
 
         {state.message ? (
           <div
-            className={`mt-6 rounded-[1.5rem] border px-4 py-4 text-sm ${
+            className={`mt-6 rounded-[1.5rem] border px-4 py-4 text-sm leading-7 ${
               state.status === "success"
                 ? "border-emerald-200 bg-emerald-50 text-emerald-900"
                 : "border-amber-200 bg-amber-50 text-amber-900"
@@ -182,6 +191,11 @@ export function CreateCapsuleForm() {
               <strong>3.</strong> 到点统一发邮件，把这段回忆重新送回来。
             </li>
           </ol>
+          <div className="soft-note mt-6 rounded-[1.5rem] px-4 py-4">
+            <p className="text-sm leading-7">
+              如果你只是想快速演示，最省事的做法是把开启时间设在 1 到 2 分钟后，自己先上传一轮内容。
+            </p>
+          </div>
         </div>
 
         <div className="paper-panel rounded-[2rem] p-6 sm:p-8">
@@ -215,7 +229,7 @@ export function CreateCapsuleForm() {
             </>
           ) : (
             <p className="fine-copy mt-4 text-sm leading-7">
-              链接会在创建成功后出现在这里。你可以直接复制发到微信群，也可以自己先打开看一眼。
+              链接会在创建成功后出现在这里。你可以直接发到微信群，也可以先自己打开一遍，确认上传页和倒计时显示都正常。
             </p>
           )}
         </div>

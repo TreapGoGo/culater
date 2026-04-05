@@ -17,9 +17,14 @@ export default function NotFound() {
           <p className="fine-copy mx-auto mt-4 max-w-2xl text-sm leading-7 sm:text-base">
             链接可能已经写错，或者这颗胶囊还没有被创建。你可以回到首页重新开始。
           </p>
-          <Link href="/" className="primary-button mt-8 h-14 px-6 text-sm font-medium">
-            回到首页
-          </Link>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link href="/" className="primary-button h-14 px-6 text-sm font-medium">
+              回到首页
+            </Link>
+            <Link href="/create" className="secondary-button h-14 px-6 text-sm">
+              创建新的胶囊
+            </Link>
+          </div>
         </section>
       </div>
     </main>

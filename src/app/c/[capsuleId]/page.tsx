@@ -71,6 +71,11 @@ export default async function CapsulePage({ params }: CapsulePageProps) {
               <p className="text-sm leading-7">
                 到期前不会展示任何已上传内容，包括创建者自己。你现在能做的，只有继续往里面放回忆。
               </p>
+              <div className="soft-note mt-5 rounded-[1.5rem] px-4 py-4">
+                <p className="fine-copy text-sm leading-7">
+                  到点后系统会自动给参与者发邮件，再把大家带回这颗胶囊。你不需要手动揭晓，也不用再回来操作。
+                </p>
+              </div>
             </div>
           </aside>
 

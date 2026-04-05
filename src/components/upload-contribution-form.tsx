@@ -33,6 +33,7 @@ export function UploadContributionForm({
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [uploaded, setUploaded] = useState(false);
+  const [messageValue, setMessageValue] = useState("");
 
   useEffect(() => {
     preparedPhotosRef.current = preparedPhotos;
@@ -134,6 +135,7 @@ export function UploadContributionForm({
 
       preparedPhotos.forEach((photo) => URL.revokeObjectURL(photo.previewUrl));
       setPreparedPhotos([]);
+      setMessageValue("");
       formRef.current?.reset();
       setUploaded(true);
     } catch (submitError) {
@@ -170,6 +172,14 @@ export function UploadContributionForm({
         <div className="mt-6">
           <CountdownChip openAt={openAt} large />
         </div>
+
+        <button
+          type="button"
+          onClick={() => setUploaded(false)}
+          className="secondary-button mt-6 h-12 px-5 text-sm"
+        >
+          再封一份内容
+        </button>
       </motion.div>
     );
   }
@@ -209,14 +219,22 @@ export function UploadContributionForm({
       </div>
 
       <label className="mt-4 block">
-        <span className="mb-2 block text-sm font-medium">给未来的一句话</span>
+        <div className="mb-2 flex items-center justify-between gap-3">
+          <span className="block text-sm font-medium">给未来的一句话</span>
+          <span className="fine-copy text-xs">{messageValue.length}/200</span>
+        </div>
         <textarea
           name="message"
           maxLength={200}
           rows={4}
           className="input-base resize-none"
           placeholder="比如：希望下次还在同一片草地上吹风。"
+          value={messageValue}
+          onChange={(event) => setMessageValue(event.target.value)}
         />
+        <p className="fine-copy mt-2 text-xs leading-6">
+          可以留空。写一句就够，不必像发朋友圈那样完整。
+        </p>
       </label>
 
       <div className="mt-4 rounded-[1.75rem] border border-dashed border-[color:var(--line)] bg-white/65 p-4">
@@ -286,6 +304,10 @@ export function UploadContributionForm({
           {error}
         </div>
       ) : null}
+
+      <p className="fine-copy mt-4 text-xs leading-6">
+        你现在看不到其他人已经传了什么。所有内容都会一直封存到开启时刻。
+      </p>
 
       <button
         type="submit"

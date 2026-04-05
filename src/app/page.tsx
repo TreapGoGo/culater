@@ -54,6 +54,9 @@ export default function Home() {
               See You Later 不是另一个云相册。它把一场聚会、一趟露营、一次毕业旅行封存起来，
               等到你们已经很久没再提它的时候，再把那一刻递回来。
             </p>
+            <p className="fine-copy mt-4 max-w-xl text-sm leading-7 sm:text-base">
+              创建只要几分钟，真正重要的是之后那段你完全忘了它存在的时间。
+            </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
               <Link href="/create" className="primary-button h-14 px-6 text-sm font-medium">
@@ -67,7 +70,7 @@ export default function Home() {
 
             <div className="mt-10 grid gap-4 sm:grid-cols-3">
               <div className="story-card rounded-[1.6rem] p-4">
-                <div className="section-label text-[10px]">MVP</div>
+                <div className="section-label text-[10px]">No Account</div>
                 <p className="mt-3 text-sm leading-7">
                   无账号体系。用邮箱识别参与者，用分享链接召集大家。
                 </p>
@@ -152,11 +155,11 @@ export default function Home() {
             <div className="mt-4 flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-3xl">
                 <h2 className="display-type text-4xl leading-tight sm:text-5xl">
-                  这版已经按 Next.js + Supabase + Resend 的 MVP 结构搭好了。
+                  这版已经能从创建、上传、等待到揭晓，完整走通。
                 </h2>
                 <p className="fine-copy mt-4 text-sm leading-7 sm:text-base">
-                  创建胶囊、上传照片、封存等待页、开启仪式、定时邮件和 Vercel Cron
-                  都有代码骨架，接上环境变量就能进入联调。
+                  创建胶囊、照片上传、封存等待、开启页、Resend 邮件和 Supabase
+                  定时揭晓都已经接好。现在更像一个可演示的产品，而不只是原型壳子。
                 </p>
               </div>
 
@@ -165,6 +168,10 @@ export default function Home() {
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
+            <div className="capsule-divider mt-8" />
+            <p className="fine-copy mt-5 text-sm leading-7">
+              如果你正在为黑客松演示准备素材，最适合的方式是先建一颗 1 到 2 分钟后开启的测试胶囊，自己上传几张照片，再等它自动醒来。
+            </p>
           </div>
         </section>
       </div>
