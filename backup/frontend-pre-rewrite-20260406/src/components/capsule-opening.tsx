@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import type { ContributionGroup } from "@/lib/types";
-import { ShareLinkButton } from "./share-link-button";
 
 type CapsuleOpeningProps = {
   capsuleTitle: string;
@@ -28,17 +27,17 @@ export function CapsuleOpening({
         <motion.section
           initial={false}
           animate={{ opacity: 1 }}
-          className="paper-panel panel-amber grain-overlay overflow-hidden rounded-[2.8rem] px-6 py-10 text-center sm:px-10 sm:py-16"
+          className="paper-panel panel-rose grain-overlay overflow-hidden rounded-[2.8rem] px-6 py-10 text-center sm:px-10 sm:py-16"
         >
           <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border border-[color:var(--line)] bg-[color:var(--foreground)]/95 text-4xl text-white shadow-2xl">
             💊
           </div>
           <p className="section-label mt-8 text-xs">Wake Up Call</p>
           <h1 className="display-type mt-4 break-words text-5xl leading-[0.96] sm:text-7xl">
-            {capsuleTitle}
+            「{capsuleTitle}」
           </h1>
           <p className="mx-auto mt-5 max-w-2xl break-words text-sm leading-7 sm:text-base">
-            这颗胶囊来自 {elapsedDays} 天前 按下按钮后 你就会看到大家当时封进去的照片和那句话
+            这颗胶囊来自 {elapsedDays} 天前。按下按钮后，你就会看到大家当时封进去的照片和那句话。
           </p>
           <button
             type="button"
@@ -62,15 +61,15 @@ export function CapsuleOpening({
             transition={{ duration: 0.65, ease: "easeOut" }}
             className="paper-panel panel-amber rounded-[2.6rem] px-6 py-8 sm:px-10"
           >
-            <div className="flex items-center justify-between gap-4">
-              <div className="section-label text-xs">Opened Capsule</div>
-              <ShareLinkButton />
-            </div>
+            <div className="section-label text-xs">Opened Capsule</div>
             <h1 className="display-type mt-4 break-words text-5xl leading-[0.96] sm:text-7xl">
-              这颗胶囊来自 {elapsedDays} 天前
+              这颗胶囊来自 {elapsedDays} 天前。
             </h1>
             <p className="fine-copy body-copy mt-4 max-w-3xl break-words text-sm sm:text-base">
               你们当时把一段舍不得丢掉的时刻放在这里。现在它醒了，内容已经按上传者整理好，可以慢慢往下看。
+            </p>
+            <p className="fine-copy meta-copy mt-3 tracking-[0.08em] uppercase">
+              From sealed memory to shared moment
             </p>
           </motion.section>
 
@@ -85,7 +84,13 @@ export function CapsuleOpening({
                   ease: "easeOut",
                   delay: groupIndex * 0.08,
                 }}
-                className="paper-panel rounded-[2.3rem] p-5 sm:p-8 panel-amber"
+                className={`paper-panel rounded-[2.3rem] p-5 sm:p-8 ${
+                  groupIndex % 3 === 0
+                    ? "panel-moss"
+                    : groupIndex % 3 === 1
+                      ? "panel-rose"
+                      : "panel-amber"
+                }`}
               >
                 <div className="flex flex-wrap items-end justify-between gap-4">
                   <div>

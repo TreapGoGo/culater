@@ -22,7 +22,7 @@ export function ConfigNotice({ title, description }: ConfigNoticeProps) {
         {requiredEnv.map((item) => (
           <div
             key={item}
-            className="rounded-[1.25rem] border border-[color:var(--line)] bg-white/5 px-4 py-3 text-sm"
+            className="rounded-[1.25rem] border border-[color:var(--line)] bg-white/70 px-4 py-3 text-sm"
           >
             {item}
           </div>

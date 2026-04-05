@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_SC, Noto_Serif_SC, Plus_Jakarta_Sans } from "next/font/google";
+import { Noto_Sans_SC, Noto_Serif_SC } from "next/font/google";
 import "./globals.css";
 
 const notoSans = Noto_Sans_SC({
@@ -16,13 +16,6 @@ const notoSerif = Noto_Serif_SC({
   display: "swap",
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-ui",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   title: "See You Later",
   description: "一个让回忆在遗忘之后重新找到你的电子时间胶囊。",
@@ -36,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="zh-CN"
-      className={`${notoSans.variable} ${notoSerif.variable} ${plusJakarta.variable} h-full antialiased`}
+      className={`${notoSans.variable} ${notoSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

@@ -12,7 +12,7 @@ export default function NotFound() {
         <section className="paper-panel rounded-[2.2rem] px-6 py-12 text-center sm:px-10">
           <div className="section-label text-xs">404</div>
           <h1 className="display-type mt-4 text-4xl sm:text-5xl">
-            没找到这颗胶囊
+            没找到这颗胶囊。
           </h1>
           <p className="fine-copy body-copy mx-auto mt-4 max-w-2xl text-sm sm:text-base">
             可能是链接输错了，或者这颗胶囊还没有被创建。你可以回到首页重新创建，或者检查一下分享链接。

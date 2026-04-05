@@ -201,10 +201,10 @@ export function UploadContributionForm({
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        className="paper-panel panel-amber rounded-[2rem] p-6 sm:p-8 lg:p-9"
+        className="paper-panel panel-moss rounded-[2rem] p-6 sm:p-8 lg:p-9"
       >
         <div className="flex items-center gap-3">
-          <CheckCircle2 className="h-8 w-8 text-[color:var(--accent)]" />
+          <CheckCircle2 className="h-8 w-8 text-[color:var(--accent-deep)]" />
           <div>
             <div className="section-label text-xs">Sealed</div>
             <h2 className="display-type text-3xl">已封入胶囊</h2>
@@ -234,7 +234,7 @@ export function UploadContributionForm({
             type="button"
             onClick={() => {
               setUploaded(false);
-              setSelectionHint("可以继续补照片 and 文字，提交一次就会再封存一份内容。");
+              setSelectionHint("可以继续补照片和文字，提交一次就会再封存一份内容。");
             }}
             className="secondary-button h-12 w-full px-5 text-sm sm:w-auto"
           >
@@ -255,9 +255,23 @@ export function UploadContributionForm({
       className="paper-panel rounded-[2rem] p-6 sm:p-8 lg:p-9"
     >
       <div className="section-label text-xs">Add Memory</div>
-      <h2 className="display-type mt-3 text-3xl sm:text-4xl" style={{ whiteSpace: "nowrap", wordBreak: "keep-all" }}>
-        上传几张照片 再留一句给未来的话
+      <h2 className="display-type mt-3 text-3xl sm:text-4xl">
+        上传几张照片，
+        <br />
+        再留一句给未来的话。
       </h2>
+
+      <div className="soft-note mt-6 rounded-[1.6rem] px-5 py-5">
+        <div className="section-label text-[10px]">First Upload</div>
+        <p className="display-type mt-3 text-2xl leading-tight">
+          第一次上传，其实只要二十秒。
+        </p>
+        <ol className="fine-copy body-copy mt-3 space-y-2 text-sm">
+          <li>1. 填昵称和接收提醒的邮箱。</li>
+          <li>2. 先选 1 张你最想留住的照片。</li>
+          <li>3. 想写一句话就写，不写也没关系。</li>
+        </ol>
+      </div>
 
       <div className="mt-7 grid gap-4 sm:grid-cols-2 sm:gap-5">
         <label>
@@ -280,7 +294,7 @@ export function UploadContributionForm({
             required
           />
           <p className="fine-copy form-help mt-2">
-            到开启时，我们会把提醒邮件发到这个邮箱
+            到开启时，我们会把提醒邮件发到这个邮箱。
           </p>
         </label>
       </div>
@@ -293,18 +307,18 @@ export function UploadContributionForm({
         <textarea
           name="message"
           maxLength={200}
-          rows={1}
+          rows={4}
           className="input-base resize-none"
-          placeholder="比如：希望下次还在同一片草地上吹风"
+          placeholder="比如：希望下次还在同一片草地上吹风。"
           value={messageValue}
           onChange={(event) => setMessageValue(event.target.value)}
         />
         <p className="fine-copy form-help mt-2">
-          可以留空。写一句就够，不需要写成长文
+          可以留空。写一句就够，不需要写成长文。
         </p>
       </label>
 
-      <div className="mt-5 rounded-[1.75rem] border border-dashed border-[color:var(--line)] bg-white/5 p-4 sm:p-5">
+      <div className="mt-5 rounded-[1.75rem] border border-dashed border-[color:var(--line)] bg-white/65 p-4 sm:p-5">
         <div
           onDragOver={(event) => {
             event.preventDefault();
@@ -327,7 +341,7 @@ export function UploadContributionForm({
           }}
           className={`rounded-[1.4rem] p-2 ${
             dragActive
-              ? "bg-[color:var(--accent-soft)]"
+              ? "bg-[color:var(--accent-soft)]/55"
               : ""
           }`}
         >
@@ -417,7 +431,7 @@ export function UploadContributionForm({
       {error ? (
         <div
           aria-live="polite"
-          className="mt-4 rounded-[1.25rem] border border-rose-500/20 bg-rose-500/10 px-4 py-3 text-sm text-rose-200"
+          className="mt-4 rounded-[1.25rem] border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-900"
         >
           {error}
         </div>
