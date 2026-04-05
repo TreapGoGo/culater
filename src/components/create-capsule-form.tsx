@@ -2,18 +2,11 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
 import { addDays, format } from "date-fns";
 import { Copy, Link2, Sparkles } from "lucide-react";
-import {
-  createCapsuleAction,
-  initialCreateCapsuleState,
-} from "@/actions/create-capsule";
+import type { CreateCapsuleState } from "@/actions/create-capsule";
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
+function SubmitButton({ pending }: { pending: boolean }) {
   return (
     <button
       type="submit"
@@ -27,10 +20,10 @@ function SubmitButton() {
 }
 
 export function CreateCapsuleForm() {
-  const [state, formAction] = useActionState(
-    createCapsuleAction,
-    initialCreateCapsuleState,
-  );
+  const [state, setState] = useState<CreateCapsuleState>({
+    status: "idle",
+  });
+  const [pending, setPending] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const defaultDate = useMemo(
@@ -56,9 +49,48 @@ export function CreateCapsuleForm() {
     window.setTimeout(() => setCopied(false), 1800);
   }
 
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const payload = {
+      title: String(formData.get("title") ?? ""),
+      creatorName: String(formData.get("creatorName") ?? ""),
+      creatorEmail: String(formData.get("creatorEmail") ?? ""),
+      openAtDate: String(formData.get("openAtDate") ?? ""),
+    };
+
+    setPending(true);
+    setCopied(false);
+
+    try {
+      const response = await fetch("/api/capsules", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = (await response.json()) as CreateCapsuleState;
+      setState(result);
+    } catch (error) {
+      console.error("CreateCapsuleForm", error);
+      setState({
+        status: "error",
+        message: "创建时出了点问题，稍后再试一次。",
+      });
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-      <form action={formAction} className="paper-panel rounded-[2rem] p-6 sm:p-8">
+      <form
+        onSubmit={handleSubmit}
+        className="paper-panel rounded-[2rem] p-6 sm:p-8"
+      >
         <div className="section-label text-xs">Create Capsule</div>
         <h1 className="display-type mt-3 text-4xl leading-tight sm:text-5xl">
           先把这段回忆轻轻封起来。
@@ -117,7 +149,7 @@ export function CreateCapsuleForm() {
         </div>
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
-          <SubmitButton />
+          <SubmitButton pending={pending} />
           <Link href="/" className="secondary-button h-14 px-6 text-sm">
             先看看首页
           </Link>
