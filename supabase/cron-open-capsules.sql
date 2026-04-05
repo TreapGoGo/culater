@@ -11,13 +11,12 @@ select
     '* * * * *',
     $$
     select
-      net.http_post(
+      net.http_get(
         url:='https://culatertest.zeabur.app/api/cron/open-capsules',
+        params:='{}'::jsonb,
         headers:=jsonb_build_object(
-          'Content-Type', 'application/json',
           'Authorization', 'Bearer REPLACE_WITH_CRON_SECRET'
-        ),
-        body:='{}'::jsonb
+        )
       ) as request_id;
     $$
   );
