@@ -1,0 +1,24 @@
+name: Open Capsules
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  trigger-open-capsules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call open capsules endpoint
+        env:
+          OPEN_CAPSULES_URL: ${{ secrets.OPEN_CAPSULES_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "$OPEN_CAPSULES_URL" ] || [ -z "$CRON_SECRET" ]; then
+            echo "Missing OPEN_CAPSULES_URL or CRON_SECRET secret."
+            exit 1
+          fi
+
+          curl --fail-with-body \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            "$OPEN_CAPSULES_URL"

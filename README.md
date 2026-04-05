@@ -91,6 +91,15 @@ npm run dev
 
 ```bash
 Authorization: Bearer <CRON_SECRET>
+
+### GitHub Actions 自动触发
+
+仓库还提供了 [`open-capsules.yml`](./.github/workflows/open-capsules.yml)，默认每 5 分钟触发一次，用来定时调用线上接口。
+
+你需要在 GitHub 仓库的 `Settings -> Secrets and variables -> Actions` 里添加：
+
+- `OPEN_CAPSULES_URL`: `https://culatertest.zeabur.app/api/cron/open-capsules`
+- `CRON_SECRET`: 你的 `CRON_SECRET`
 ```
 
 ## 说明
