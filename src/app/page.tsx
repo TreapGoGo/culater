@@ -91,8 +91,8 @@ export default function Home() {
             </h1>
 
             <p className="syl-hero__lede">
-              <span className="block" style={{ whiteSpace: "nowrap" }}>不是云相册 不是共享文件夹</span>
-              <span className="block" style={{ whiteSpace: "nowrap" }}>是一颗会在未来某天自己找到你的时间胶囊</span>
+              <span className="block" style={{ whiteSpace: "nowrap" }}>不提升效率 不优化流程 不改变世界</span>
+              <span className="block" style={{ whiteSpace: "nowrap" }}>只是让某个瞬间在未来某天重新活过来</span>
             </p>
 
             <div className="syl-hero__actions">
@@ -153,10 +153,11 @@ export default function Home() {
         </section>
 
         <section className="syl-section syl-concept landing-reveal" style={{ animationDelay: "260ms" }}>
-
           <h2 className="syl-concept__title">
             <span className="block" style={{ whiteSpace: "nowrap" }}>我们不吹嘘改变世界</span>
-            <span className="block" style={{ whiteSpace: "nowrap" }}>而是帮你<span className="text-[#e8b86d]" style={{ color: "#e8b86d" }}>回忆</span>世界的美好</span>
+            <span className="block" style={{ whiteSpace: "nowrap" }}>
+              而是帮你<span style={{ color: "#e8b86d" }}>回忆</span>世界的美好
+            </span>
           </h2>
           <p className="syl-concept__caption">
             一颗胶囊 · 一群朋友 · 一段被封存的时光
@@ -256,8 +257,8 @@ export default function Home() {
         <section className="syl-closing landing-reveal" style={{ animationDelay: "420ms" }}>
           <div className="syl-closing__inner">
             <h2 className="syl-closing__title">
-              <span className="block">最好的回忆</span>
-              <span className="block">是你以为已经忘了的那些</span>
+              <span className="block" style={{ whiteSpace: "nowrap" }}>最好的回忆</span>
+              <span className="block" style={{ whiteSpace: "nowrap" }}>是你以为已经忘了的那些</span>
             </h2>
             <p className="syl-closing__lede">在这个人人都在造工具的时代</p>
             <p className="syl-closing__lede">我们造了一颗会自己找到你的胶囊</p>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { addMinutes, addMonths, addYears, format } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
@@ -79,7 +79,7 @@ export function CreateCapsuleForm({ preset }: CreateCapsuleFormProps) {
       setState((current) => ({
         ...current,
         status: "error",
-        message: "复制没有成功。你可以先手动复制下面的链接，再发到群里。",
+        message: "复制没有成功 你可以先手动复制下面的链接 再发到群里",
       }));
     }
   }
@@ -102,7 +102,7 @@ export function CreateCapsuleForm({ preset }: CreateCapsuleFormProps) {
     if (Number.isNaN(openAt.getTime())) {
       setState({
         status: "error",
-        message: "开启时间没有读出来，请重新选一次时间。",
+        message: "开启时间没有读出来 请重新选一次时间",
       });
       return;
     }
@@ -132,7 +132,7 @@ export function CreateCapsuleForm({ preset }: CreateCapsuleFormProps) {
         | null;
 
       if (!result) {
-        throw new Error("创建接口返回了无法识别的结果。");
+        throw new Error("创建接口返回了无法识别的结果");
       }
 
       setState(result);
@@ -143,7 +143,7 @@ export function CreateCapsuleForm({ preset }: CreateCapsuleFormProps) {
       console.error("CreateCapsuleForm", error);
       setState({
         status: "error",
-        message: "这颗胶囊还没成功放下去。稍后再试一次就好。",
+        message: "这颗胶囊还没成功放下去 稍后再试一次就好",
       });
     } finally {
       setPending(false);
@@ -203,15 +203,15 @@ export function CreateCapsuleForm({ preset }: CreateCapsuleFormProps) {
               <ol className="mt-8 space-y-6 text-sm leading-7">
                 <li className="flex gap-4">
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-xs font-bold text-amber-200">1</span>
-                  <span><strong>甩到群聊里</strong>，让大家点击链接。</span>
+                  <span><strong>甩到群聊里</strong>，让大家点击链接</span>
                 </li>
                 <li className="flex gap-4">
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-xs font-bold text-amber-200">2</span>
-                  <span><strong>上传照片</strong>，留一句想对未来的话。</span>
+                  <span><strong>上传照片</strong>，留一句想对未来的话</span>
                 </li>
                 <li className="flex gap-4">
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-xs font-bold text-amber-200">3</span>
-                  <span><strong>静候开启</strong>，到期后所有人都会收到提醒。</span>
+                  <span><strong>静候开启</strong>，到期后所有人都会收到提醒</span>
                 </li>
               </ol>
 
