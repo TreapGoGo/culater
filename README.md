@@ -8,7 +8,7 @@
 - Tailwind CSS 4
 - Supabase Postgres + Storage
 - Resend 邮件通知
-- Vercel Cron 定时唤醒
+- Supabase Cron 定时唤醒
 
 ## 已实现的 MVP 范围
 
@@ -80,26 +80,21 @@ npm run dev
 
 ## 定时任务
 
-仓库内置了 [`vercel.json`](./vercel.json)，默认每小时触发一次：
+这版的揭晓逻辑在 [src/app/api/cron/open-capsules/route.ts](/E:/seeyoulater/src/app/api/cron/open-capsules/route.ts)：
 
 - 读取 `open_at <= now` 且未开启的胶囊
 - 聚合所有参与者邮箱
 - 发送唤醒邮件
 - 更新状态为 `opened`
 
-如果设置了 `CRON_SECRET`，调用 `/api/cron/open-capsules` 时需要带上：
+推荐用 Supabase 的 `pg_cron + pg_net` 来定时触发它。仓库里提供了 SQL 模板 [supabase/cron-open-capsules.sql](/E:/seeyoulater/supabase/cron-open-capsules.sql)，默认每分钟触发一次。
+
+执行前把模板里的 `REPLACE_WITH_CRON_SECRET` 改成你自己的 `CRON_SECRET`，如果线上域名不是 `https://culatertest.zeabur.app`，也要同步改掉 URL，然后在 Supabase SQL Editor 或 CLI 中执行。
+
+如果设置了 `CRON_SECRET`，Supabase 调用 `/api/cron/open-capsules` 时会自动带上：
 
 ```bash
 Authorization: Bearer <CRON_SECRET>
-
-### GitHub Actions 自动触发
-
-仓库还提供了 [`open-capsules.yml`](./.github/workflows/open-capsules.yml)，默认每 5 分钟触发一次，用来定时调用线上接口。
-
-你需要在 GitHub 仓库的 `Settings -> Secrets and variables -> Actions` 里添加：
-
-- `OPEN_CAPSULES_URL`: `https://culatertest.zeabur.app/api/cron/open-capsules`
-- `CRON_SECRET`: 你的 `CRON_SECRET`
 ```
 
 ## 说明

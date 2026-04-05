@@ -27,7 +27,7 @@ function buildEmailHtml(title: string, openUrl: string) {
   `;
 }
 
-export async function GET(request: Request) {
+async function handleOpenCapsules(request: Request) {
   if (env.CRON_SECRET) {
     const auth = request.headers.get("authorization");
     if (auth !== `Bearer ${env.CRON_SECRET}`) {
@@ -88,4 +88,12 @@ export async function GET(request: Request) {
     processed: results.length,
     results,
   });
+}
+
+export async function GET(request: Request) {
+  return handleOpenCapsules(request);
+}
+
+export async function POST(request: Request) {
+  return handleOpenCapsules(request);
 }
