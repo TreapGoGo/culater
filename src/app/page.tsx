@@ -87,9 +87,7 @@ export default function Home() {
             </div>
 
             <h1 className="syl-hero__title" style={{ whiteSpace: "nowrap", wordBreak: "keep-all" }}>
-              <span className="inline-block">而是帮你</span>
-              <span className="inline-block text-[color:var(--landing-accent)]">回忆</span>
-              <span className="inline-block">世界的美好</span>
+              一起封存此刻 寄往未来
             </h1>
 
             <p className="syl-hero__lede">
@@ -158,7 +156,7 @@ export default function Home() {
 
           <h2 className="syl-concept__title">
             <span className="block" style={{ whiteSpace: "nowrap" }}>我们不吹嘘改变世界</span>
-            <span className="block" style={{ whiteSpace: "nowrap" }}>而是帮你回忆世界的美好</span>
+            <span className="block" style={{ whiteSpace: "nowrap" }}>而是帮你<span className="text-[#e8b86d]" style={{ color: "#e8b86d" }}>回忆</span>世界的美好</span>
           </h2>
           <p className="syl-concept__caption">
             一颗胶囊 · 一群朋友 · 一段被封存的时光
