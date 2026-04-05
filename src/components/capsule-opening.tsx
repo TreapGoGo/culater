@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import type { Capsule, ContributionGroup } from "@/lib/types";
@@ -118,11 +117,13 @@ export function CapsuleOpening({
                               key={photoPath}
                               className="photo-card mb-4 overflow-hidden rounded-[1.4rem] bg-white"
                             >
-                              <Image
+                              {/* Public Supabase asset URLs are rendered directly here to avoid broken remote optimization on Zeabur builds. */}
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
                                 src={src}
                                 alt={`${group.nickname} 上传的照片`}
-                                width={1200}
-                                height={1600}
+                                loading="lazy"
+                                decoding="async"
                                 className="h-auto w-full object-cover"
                               />
                             </div>
