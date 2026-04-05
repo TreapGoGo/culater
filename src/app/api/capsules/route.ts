@@ -1,8 +1,7 @@
-import { addDays, addYears, isAfter, isBefore } from "date-fns";
+import { addMinutes, addYears, isAfter, isBefore } from "date-fns";
 import { NextResponse } from "next/server";
 import { createCapsule } from "@/lib/capsules";
 import { getAppUrl, hasSupabaseConfig } from "@/lib/env";
-import { toCapsuleOpenIso } from "@/lib/time";
 
 export const runtime = "nodejs";
 
@@ -53,7 +52,7 @@ export async function POST(request: Request) {
   const title = asText(body.title);
   const creatorName = asText(body.creatorName);
   const creatorEmail = asText(body.creatorEmail).toLowerCase();
-  const openAtDate = asText(body.openAtDate);
+  const openAtInput = asText(body.openAt);
 
   if (!title || title.length > 30) {
     return NextResponse.json(
@@ -85,25 +84,35 @@ export async function POST(request: Request) {
     );
   }
 
-  if (!openAtDate) {
+  if (!openAtInput) {
     return NextResponse.json(
       {
         status: "error",
-        message: "请选择开启日期。",
+        message: "请选择开启时间。",
       },
       { status: 400 },
     );
   }
 
-  const openAt = new Date(toCapsuleOpenIso(openAtDate));
-  const minDate = addDays(new Date(), 7);
+  const openAt = new Date(openAtInput);
+  if (Number.isNaN(openAt.getTime())) {
+    return NextResponse.json(
+      {
+        status: "error",
+        message: "开启时间格式不正确。",
+      },
+      { status: 400 },
+    );
+  }
+
+  const minDate = addMinutes(new Date(), 1);
   const maxDate = addYears(new Date(), 1);
 
   if (isBefore(openAt, minDate) || isAfter(openAt, maxDate)) {
     return NextResponse.json(
       {
         status: "error",
-        message: "开启时间需要在 7 天后到 1 年内。",
+        message: "开启时间需要在 1 分钟后到 1 年内。",
       },
       { status: 400 },
     );

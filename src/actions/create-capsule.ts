@@ -1,10 +1,9 @@
 "use server";
 
-import { addDays, addYears, isAfter, isBefore } from "date-fns";
+import { addMinutes, addYears, isAfter, isBefore } from "date-fns";
 import { headers } from "next/headers";
 import { createCapsule } from "@/lib/capsules";
 import { getAppUrl, hasSupabaseConfig } from "@/lib/env";
-import { toCapsuleOpenIso } from "@/lib/time";
 
 export type CreateCapsuleState = {
   status: "idle" | "success" | "error";
@@ -48,7 +47,7 @@ export async function createCapsuleAction(
   const title = asText(formData.get("title"));
   const creatorName = asText(formData.get("creatorName"));
   const creatorEmail = asText(formData.get("creatorEmail")).toLowerCase();
-  const openAtDate = asText(formData.get("openAtDate"));
+  const openAtInput = asText(formData.get("openAt"));
 
   if (!title || title.length > 30) {
     return {
@@ -71,21 +70,21 @@ export async function createCapsuleAction(
     };
   }
 
-  if (!openAtDate) {
+  if (!openAtInput) {
     return {
       status: "error",
-      message: "请选择开启日期。",
+      message: "请选择开启时间。",
     };
   }
 
-  const openAt = new Date(toCapsuleOpenIso(openAtDate));
-  const minDate = addDays(new Date(), 7);
+  const openAt = new Date(openAtInput);
+  const minDate = addMinutes(new Date(), 1);
   const maxDate = addYears(new Date(), 1);
 
   if (isBefore(openAt, minDate) || isAfter(openAt, maxDate)) {
     return {
       status: "error",
-      message: "开启时间需要在 7 天后到 1 年内。",
+      message: "开启时间需要在 1 分钟后到 1 年内。",
     };
   }
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { addDays, format } from "date-fns";
+import { addMinutes, addYears, format } from "date-fns";
 import { Copy, Link2, Sparkles } from "lucide-react";
 import type { CreateCapsuleState } from "@/actions/create-capsule";
 
@@ -26,16 +26,16 @@ export function CreateCapsuleForm() {
   const [pending, setPending] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const defaultDate = useMemo(
-    () => format(addDays(new Date(), 30), "yyyy-MM-dd"),
+  const defaultDateTime = useMemo(
+    () => format(addMinutes(new Date(), 30), "yyyy-MM-dd'T'HH:mm"),
     [],
   );
-  const minDate = useMemo(
-    () => format(addDays(new Date(), 7), "yyyy-MM-dd"),
+  const minDateTime = useMemo(
+    () => format(addMinutes(new Date(), 1), "yyyy-MM-dd'T'HH:mm"),
     [],
   );
-  const maxDate = useMemo(
-    () => format(addDays(new Date(), 365), "yyyy-MM-dd"),
+  const maxDateTime = useMemo(
+    () => format(addYears(new Date(), 1), "yyyy-MM-dd'T'HH:mm"),
     [],
   );
 
@@ -57,7 +57,7 @@ export function CreateCapsuleForm() {
       title: String(formData.get("title") ?? ""),
       creatorName: String(formData.get("creatorName") ?? ""),
       creatorEmail: String(formData.get("creatorEmail") ?? ""),
-      openAtDate: String(formData.get("openAtDate") ?? ""),
+      openAt: new Date(String(formData.get("openAt") ?? "")).toISOString(),
     };
 
     setPending(true);
@@ -96,8 +96,8 @@ export function CreateCapsuleForm() {
           先把这段回忆轻轻封起来。
         </h1>
         <p className="fine-copy mt-3 max-w-2xl text-sm leading-7 sm:text-base">
-          这颗胶囊会在你们不再天天提起它的时候重新回来。MVP 默认在所选日期北京时间
-          20:00 开启，保证“等一下”的感觉足够完整。
+          这颗胶囊会在你设定的那个分钟重新回来。现在为了方便测试，最短只需要等 1
+          分钟，你可以直接验证“揭晓”的那一刻。
         </p>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -135,13 +135,13 @@ export function CreateCapsuleForm() {
           </label>
 
           <label className="sm:col-span-2">
-            <span className="mb-2 block text-sm font-medium">开启日期</span>
+            <span className="mb-2 block text-sm font-medium">开启时间</span>
             <input
-              name="openAtDate"
-              type="date"
-              min={minDate}
-              max={maxDate}
-              defaultValue={defaultDate}
+              name="openAt"
+              type="datetime-local"
+              min={minDateTime}
+              max={maxDateTime}
+              defaultValue={defaultDateTime}
               className="input-base"
               required
             />
