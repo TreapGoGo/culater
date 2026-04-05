@@ -1,5 +1,5 @@
 {
   "app_dir": "/",
   "build_command": "npm install && npm run build",
-  "start_command": "npm start"
+  "start_command": "node .next/standalone/server.js"
 }
