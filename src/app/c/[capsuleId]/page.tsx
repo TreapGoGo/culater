@@ -26,8 +26,8 @@ export default async function CapsulePage({ params }: CapsulePageProps) {
             <BrandMark />
           </header>
           <ConfigNotice
-            title="上传页已经搭好，但还没连上数据层"
-            description="这个页面的表单、照片压缩和封存体验已经可以看了。要让它真正写入 Supabase，请先补齐环境变量并执行 schema.sql。"
+            title="上传页已经搭好 但还没连上数据层"
+            description="这个页面的表单 照片压缩和封存体验已经可以看了 要让它真正写入 Supabase 请先补齐环境变量并执行 schema.sql"
           />
         </div>
       </main>
@@ -78,7 +78,7 @@ export default async function CapsulePage({ params }: CapsulePageProps) {
               <p className="display-type mt-4 text-2xl leading-tight sm:text-3xl" style={{ whiteSpace: "nowrap" }}>
                 现在还不能看 只能继续往里放内容
               </p>
-              <p className="body-copy mt-4 text-sm">
+              <p className="body-copy mt-4 text-sm leading-7">
                 <span className="block" style={{ whiteSpace: "nowrap" }}>开启前不会展示任何已上传内容 包括创建者自己</span>
                 <span className="block" style={{ whiteSpace: "nowrap" }}>你现在能做的 就是继续上传照片和一句话</span>
               </p>

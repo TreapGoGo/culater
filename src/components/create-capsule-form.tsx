@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { addMinutes, addMonths, addYears, format } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
@@ -311,7 +311,7 @@ export function CreateCapsuleForm({ preset }: CreateCapsuleFormProps) {
               </div>
             </div>
             <p className="fine-copy form-help mt-2">
-              现在支持精确到分钟。最短 1 分钟后开启，最长 1 年后开启。
+              现在支持精确到分钟。最短 1 分钟后开启，最长 1 年后开启
             </p>
           </div>
         </div>

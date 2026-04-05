@@ -85,12 +85,12 @@ export function UploadContributionForm({
     });
 
     if (!uniquePicked.length) {
-      setSelectionHint("这些照片已经在列表里了，所以这次没有重复加入。");
+      setSelectionHint("这些照片已经在列表里了，所以这次没有重复加入");
       return;
     }
 
     if (preparedPhotosRef.current.length + uniquePicked.length > maxPhotoCount) {
-      setError(`一次最多准备 ${maxPhotoCount} 张照片。`);
+      setError(`一次最多准备 ${maxPhotoCount} 张照片`);
       return;
     }
 
@@ -98,11 +98,11 @@ export function UploadContributionForm({
       const nextPhotos = await Promise.all(
         uniquePicked.map(async (file) => {
           if (file.size > maxPhotoSize) {
-            throw new Error(`${file.name} 超过 20MB 了。`);
+            throw new Error(`${file.name} 超过 20MB 了`);
           }
 
           if (!file.type.startsWith("image/")) {
-            throw new Error(`${file.name} 不是可用的图片文件。`);
+            throw new Error(`${file.name} 不是可用的图片文件`);
           }
 
           const compressed = await imageCompression(file, {
@@ -128,13 +128,13 @@ export function UploadContributionForm({
         setPreparedPhotos((current) => [...current, ...nextPhotos]);
       });
       if (uniquePicked.length !== picked.length) {
-        setSelectionHint("重复的照片已经自动跳过了。");
+        setSelectionHint("重复的照片已经自动跳过了");
       }
     } catch (prepareError) {
       const message =
         prepareError instanceof Error
           ? prepareError.message
-          : "照片处理失败了，请换一张再试。";
+          : "照片处理失败了，请换一张再试";
 
       setError(message);
     }
@@ -153,7 +153,7 @@ export function UploadContributionForm({
 
   async function submitContribution(formData: FormData) {
     if (!preparedPhotos.length) {
-      setError("先选至少一张照片，再把它封进胶囊。");
+      setError("先选至少一张照片，再把它封进胶囊");
       return;
     }
 
@@ -177,7 +177,7 @@ export function UploadContributionForm({
         | null;
 
       if (!response.ok) {
-        throw new Error(payload?.message ?? "封存失败，请稍后再试。");
+        throw new Error(payload?.message ?? "封存失败，请稍后再试");
       }
 
       preparedPhotos.forEach((photo) => URL.revokeObjectURL(photo.previewUrl));
@@ -189,7 +189,7 @@ export function UploadContributionForm({
       const message =
         submitError instanceof Error
           ? submitError.message
-          : "这次没能封存成功，请稍后再试一次。";
+          : "这次没能封存成功，请稍后再试一次";
       setError(message);
     } finally {
       setSubmitting(false);
@@ -207,13 +207,13 @@ export function UploadContributionForm({
           <CheckCircle2 className="h-8 w-8 text-[color:var(--accent)]" />
           <div>
             <div className="section-label text-xs">Sealed</div>
-            <h2 className="display-type text-3xl">已封入胶囊</h2>
+            <h2 className="display-type text-3xl" style={{ whiteSpace: "nowrap" }}>已封入胶囊</h2>
           </div>
         </div>
 
         <p className="fine-copy mt-4 text-sm leading-7">
-          你的照片和那句话已经放进「{capsuleTitle}」。到 {formatOpenDate(openAt)}
-          左右，大家会一起收到“这颗胶囊醒了”的邮件提醒。
+          你的照片和那句话已经放进「{capsuleTitle}」 到 {formatOpenDate(openAt)}
+          左右 大家会一起收到“这颗胶囊醒了”的邮件提醒
         </p>
 
         <div className="mt-6">
@@ -223,9 +223,9 @@ export function UploadContributionForm({
         <div className="soft-note mt-6 rounded-[1.5rem] px-4 py-4">
           <p className="text-sm font-medium">接下来会发生什么</p>
           <ol className="fine-copy body-copy mt-3 space-y-2 text-sm">
-            <li>1. 你可以继续回来补新的照片和文字。</li>
-            <li>2. 同一条链接也可以继续发给其他人。</li>
-            <li>3. 到开启时间后，大家会自动收到提醒邮件。</li>
+            <li>1. 你可以继续回来补新的照片和文字</li>
+            <li>2. 同一条链接也可以继续发给其他人</li>
+            <li>3. 到开启时间后 大家会自动收到提醒邮件</li>
           </ol>
         </div>
 
@@ -234,7 +234,7 @@ export function UploadContributionForm({
             type="button"
             onClick={() => {
               setUploaded(false);
-              setSelectionHint("可以继续补照片 and 文字，提交一次就会再封存一份内容。");
+              setSelectionHint("可以继续补照片 and 文字，提交一次就会再封存一份内容");
             }}
             className="secondary-button h-12 w-full px-5 text-sm sm:w-auto"
           >
@@ -280,7 +280,7 @@ export function UploadContributionForm({
             required
           />
           <p className="fine-copy form-help mt-2">
-            到开启时，我们会把提醒邮件发到这个邮箱
+            到开启时 我们会把提醒邮件发到这个邮箱
           </p>
         </label>
       </div>
@@ -300,7 +300,7 @@ export function UploadContributionForm({
           onChange={(event) => setMessageValue(event.target.value)}
         />
         <p className="fine-copy form-help mt-2">
-          可以留空。写一句就够，不需要写成长文
+          可以留空 写一句就够 不需要写成长文
         </p>
       </label>
 
@@ -424,7 +424,7 @@ export function UploadContributionForm({
       ) : null}
 
       <p className="fine-copy form-help mt-4">
-        在开启之前，你看不到任何人已经传了什么，包括你自己这次刚刚提交的内容。
+        在开启之前，你看不到任何人已经传了什么，包括你自己这次刚刚提交的内容
       </p>
 
       <button
