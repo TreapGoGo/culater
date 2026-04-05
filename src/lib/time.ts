@@ -1,23 +1,42 @@
 import {
-  differenceInCalendarDays,
-  format,
   formatDistanceStrict,
   intervalToDuration,
 } from "date-fns";
 import { zhCN } from "date-fns/locale";
 
+const DISPLAY_TIME_ZONE = "Asia/Shanghai";
+const DAY_MS = 24 * 60 * 60 * 1000;
+
 export function formatOpenDate(input: string | Date) {
-  return format(new Date(input), "yyyy 年 M 月 d 日 HH:mm", {
-    locale: zhCN,
+  const formatter = new Intl.DateTimeFormat("zh-CN", {
+    timeZone: DISPLAY_TIME_ZONE,
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
   });
+
+  const parts = formatter.formatToParts(new Date(input));
+  const pick = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((part) => part.type === type)?.value ?? "";
+
+  return `${pick("year")} 年 ${pick("month")} 月 ${pick("day")} 日 ${pick("hour")}:${pick("minute")}`;
 }
 
 export function daysUntil(input: string | Date) {
-  return Math.max(0, differenceInCalendarDays(new Date(input), new Date()));
+  return Math.max(
+    0,
+    Math.floor((new Date(input).getTime() - new Date().getTime()) / DAY_MS),
+  );
 }
 
 export function daysSince(input: string | Date) {
-  return Math.max(0, differenceInCalendarDays(new Date(), new Date(input)));
+  return Math.max(
+    0,
+    Math.floor((new Date().getTime() - new Date(input).getTime()) / DAY_MS),
+  );
 }
 
 export function relativeDistance(from: string | Date, to = new Date()) {

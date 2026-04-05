@@ -2,35 +2,37 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import type { Capsule, ContributionGroup } from "@/lib/types";
-import { daysSince, formatOpenDate } from "@/lib/time";
+import type { ContributionGroup } from "@/lib/types";
 
 type CapsuleOpeningProps = {
-  capsule: Capsule;
+  capsuleTitle: string;
+  elapsedDays: number;
+  formattedOpenAt: string;
   groups: ContributionGroup[];
   photoUrls: Record<string, string>;
 };
 
 export function CapsuleOpening({
-  capsule,
+  capsuleTitle,
+  elapsedDays,
+  formattedOpenAt,
   groups,
   photoUrls,
 }: CapsuleOpeningProps) {
   const [opened, setOpened] = useState(false);
-  const elapsedDays = daysSince(capsule.createdAt);
 
   return (
     <div className="space-y-8">
       {!opened ? (
         <motion.section
-          initial={{ opacity: 0 }}
+          initial={false}
           animate={{ opacity: 1 }}
           className="paper-panel grain-overlay overflow-hidden rounded-[2.4rem] px-6 py-10 text-center sm:px-10 sm:py-16"
         >
           <div className="mx-auto h-24 w-24 rounded-full bg-[color:var(--foreground)]/95 shadow-2xl" />
           <p className="section-label mt-8 text-xs">Wake Up Call</p>
           <h1 className="display-type mt-4 text-4xl leading-tight sm:text-6xl">
-            「{capsule.title}」
+            「{capsuleTitle}」
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 sm:text-base">
             这颗胶囊来自 {elapsedDays} 天前，将在你按下按钮之后缓缓打开。里面的每一张照片，
@@ -44,7 +46,7 @@ export function CapsuleOpening({
             轻轻打开
           </button>
           <p className="fine-copy mt-4 text-xs">
-            开启时间：{formatOpenDate(capsule.openAt)}
+            开启时间：{formattedOpenAt}
           </p>
         </motion.section>
       ) : null}
@@ -52,7 +54,7 @@ export function CapsuleOpening({
       {opened ? (
         <>
           <motion.section
-            initial={{ opacity: 0, y: 18 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: "easeOut" }}
             className="paper-panel rounded-[2.2rem] px-6 py-8 sm:px-10"
@@ -74,7 +76,7 @@ export function CapsuleOpening({
             groups.map((group, groupIndex) => (
               <motion.section
                 key={group.id}
-                initial={{ opacity: 0, y: 22 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   duration: 0.55,
@@ -140,7 +142,7 @@ export function CapsuleOpening({
             ))
           ) : (
             <motion.section
-              initial={{ opacity: 0, y: 18 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               className="paper-panel rounded-[2rem] p-8 text-center"
             >

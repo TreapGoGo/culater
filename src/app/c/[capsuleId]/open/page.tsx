@@ -8,6 +8,7 @@ import {
   listContributionsByCapsule,
 } from "@/lib/capsules";
 import { hasSupabaseConfig } from "@/lib/env";
+import { daysSince as getDaysSince, formatOpenDate as getFormattedOpenDate } from "@/lib/time";
 import type { ContributionGroup } from "@/lib/types";
 
 type CapsuleOpenPageProps = {
@@ -84,7 +85,9 @@ export default async function CapsuleOpenPage({
 
         <section className="py-6 lg:py-10">
           <CapsuleOpening
-            capsule={capsule}
+            capsuleTitle={capsule.title}
+            elapsedDays={getDaysSince(capsule.createdAt)}
+            formattedOpenAt={getFormattedOpenDate(capsule.openAt)}
             groups={[...grouped.values()]}
             photoUrls={photoUrls}
           />

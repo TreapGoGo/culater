@@ -12,7 +12,7 @@ export function CountdownChip({
   openAt,
   large = false,
 }: CountdownChipProps) {
-  const [now, setNow] = useState(() => new Date());
+  const [now, setNow] = useState(() => new Date(openAt));
 
   useEffect(() => {
     const timer = window.setInterval(() => {
