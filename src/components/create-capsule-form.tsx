@@ -45,10 +45,6 @@ export function CreateCapsuleForm({ preset }: CreateCapsuleFormProps) {
   
   const [openAtValue, setOpenAtValue] = React.useState(defaultDateTime);
 
-  const minDateTime = React.useMemo(
-    () => format(addMinutes(new Date(), 1), "yyyy-MM-dd'T'HH:mm"),
-    [],
-  );
   const maxDateTime = React.useMemo(
     () => format(addYears(new Date(), 1), "yyyy-MM-dd'T'HH:mm"),
     [],
@@ -151,7 +147,7 @@ export function CreateCapsuleForm({ preset }: CreateCapsuleFormProps) {
   }
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <div className="w-full">
       <AnimatePresence>
         {showModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
@@ -285,7 +281,6 @@ export function CreateCapsuleForm({ preset }: CreateCapsuleFormProps) {
               <input
                 name="openAt"
                 type="datetime-local"
-                min={minDateTime}
                 max={maxDateTime}
                 value={openAtValue}
                 onChange={(e) => setOpenAtValue(e.target.value)}
@@ -310,9 +305,6 @@ export function CreateCapsuleForm({ preset }: CreateCapsuleFormProps) {
                 ))}
               </div>
             </div>
-            <p className="fine-copy form-help mt-2">
-              现在支持精确到分钟。最短 1 分钟后开启，最长 1 年后开启
-            </p>
           </div>
         </div>
 

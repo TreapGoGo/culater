@@ -14,15 +14,22 @@ const journeySteps: Array<{
 type JourneyStepsProps = {
   current: JourneyStepKey;
   className?: string;
+  layout?: "grid" | "stack";
 };
 
-export function JourneySteps({ current, className = "" }: JourneyStepsProps) {
+export function JourneySteps({
+  current,
+  className = "",
+  layout = "grid",
+}: JourneyStepsProps) {
   const currentIndex = journeySteps.findIndex((step) => step.key === current);
+  const stepsClassName =
+    layout === "stack" ? "mt-4 grid gap-3" : "mt-4 grid gap-3 sm:grid-cols-4";
 
   return (
     <div className={`journey-shell ${className}`.trim()}>
       <div className="section-label text-[10px]">Capsule Journey</div>
-      <div className="mt-4 grid gap-3 sm:grid-cols-4">
+      <div className={stepsClassName}>
         {journeySteps.map((step, index) => {
           const state =
             index < currentIndex

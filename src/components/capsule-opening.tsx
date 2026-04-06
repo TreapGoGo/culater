@@ -30,8 +30,12 @@ export function CapsuleOpening({
           animate={{ opacity: 1 }}
           className="paper-panel panel-amber grain-overlay overflow-hidden rounded-[2.8rem] px-6 py-10 text-center sm:px-10 sm:py-16"
         >
-          <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border border-[color:var(--line)] bg-[color:var(--foreground)]/95 text-4xl text-white shadow-2xl">
-            💊
+          <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border border-[color:var(--line)] bg-[color:var(--foreground)]/95 shadow-2xl">
+            <span className="syl-brand__capsule syl-brand__capsule--large" aria-hidden="true">
+              <span className="syl-brand__capsule-half syl-brand__capsule-half--light" />
+              <span className="syl-brand__capsule-half syl-brand__capsule-half--dark" />
+              <span className="syl-brand__capsule-shine" />
+            </span>
           </div>
           <p className="section-label mt-8 text-xs">Wake Up Call</p>
           <h1 className="display-type mt-4 break-words text-5xl leading-[0.96] sm:text-7xl">

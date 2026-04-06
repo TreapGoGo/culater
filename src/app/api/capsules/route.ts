@@ -1,4 +1,4 @@
-import { addMinutes, addYears, isAfter, isBefore } from "date-fns";
+import { addYears, isAfter } from "date-fns";
 import { NextResponse } from "next/server";
 import { createCapsule } from "@/lib/capsules";
 import { getAppUrl, hasSupabaseConfig } from "@/lib/env";
@@ -106,14 +106,13 @@ export async function POST(request: Request) {
     );
   }
 
-  const minDate = addMinutes(new Date(), 1);
   const maxDate = addYears(new Date(), 1);
 
-  if (isBefore(openAt, minDate) || isAfter(openAt, maxDate)) {
+  if (isAfter(openAt, maxDate)) {
     return NextResponse.json(
       {
         status: "error",
-        message: "开启时间需要在 1 分钟后到 1 年内。",
+        message: "开启时间需要在 1 年内。",
       },
       { status: 400 },
     );

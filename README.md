@@ -89,7 +89,7 @@ npm run dev
 
 推荐用 Supabase 的 `pg_cron + pg_net` 来定时触发它。仓库里提供了 SQL 模板 [supabase/cron-open-capsules.sql](/E:/seeyoulater/supabase/cron-open-capsules.sql)，默认每分钟触发一次。
 
-执行前把模板里的 `REPLACE_WITH_CRON_SECRET` 改成你自己的 `CRON_SECRET`，如果线上域名不是 `https://culatertest.zeabur.app`，也要同步改掉 URL，然后在 Supabase SQL Editor 或 CLI 中执行。
+执行前把模板里的 `REPLACE_WITH_CRON_SECRET` 改成你自己的 `CRON_SECRET`，如果线上域名不是 `https://seeyoulater.zeabur.app`，也要同步改掉 URL，然后在 Supabase SQL Editor 或 CLI 中执行。
 
 如果设置了 `CRON_SECRET`，Supabase 调用 `/api/cron/open-capsules` 时会自动带上：
 

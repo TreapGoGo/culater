@@ -12,7 +12,7 @@ select
     $$
     select
       net.http_get(
-        url:='https://culatertest.zeabur.app/api/cron/open-capsules',
+        url:='https://seeyoulater.zeabur.app/api/cron/open-capsules',
         params:='{}'::jsonb,
         headers:=jsonb_build_object(
           'Authorization', 'Bearer REPLACE_WITH_CRON_SECRET'

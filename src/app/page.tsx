@@ -1,12 +1,15 @@
 import Link from "next/link";
 import {
+  ArrowUpRight,
   CalendarDays,
   Coins,
+  FolderGit2,
   LockKeyhole,
   Mail,
   Upload,
   UserRound,
 } from "lucide-react";
+import { BrandMark } from "@/components/brand-mark";
 
 const steps = [
   {
@@ -68,12 +71,7 @@ export default function Home() {
       <div className="syl-shell">
         <section className="syl-hero">
           <header className="syl-nav landing-reveal" style={{ animationDelay: "40ms" }}>
-            <Link href="/" className="syl-brand">
-              <span className="syl-brand__mark">💊</span>
-              <span className="syl-brand__text">
-                <span className="syl-brand__name">See You Later</span>
-              </span>
-            </Link>
+            <BrandMark />
 
             <Link href="/create" className="syl-button syl-button--ghost">
               创建胶囊
@@ -96,9 +94,19 @@ export default function Home() {
             </p>
 
             <div className="syl-hero__actions">
-              <Link href="/create" className="syl-button syl-button--primary">
+              <Link href="/create" className="syl-button syl-button--primary syl-button--hero">
                 封一颗胶囊
               </Link>
+              <a
+                href="https://github.com/TreapGoGo/culater"
+                target="_blank"
+                rel="noreferrer"
+                className="syl-button syl-button--mono syl-button--hero"
+              >
+                <FolderGit2 className="h-4 w-4" />
+                GitHub 仓库
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
             </div>
           </div>
 
